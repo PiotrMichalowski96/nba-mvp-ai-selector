@@ -46,6 +46,17 @@ sonarqube {
     }
 }
 
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        xml.required.set(true)
+    }
+}
+
 tasks.sonarqube {
     dependsOn(tasks.jacocoTestReport)
 }
