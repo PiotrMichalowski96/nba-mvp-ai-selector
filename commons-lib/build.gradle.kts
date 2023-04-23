@@ -31,7 +31,6 @@ jacoco {
 sonarqube {
     properties {
         property("sonar.projectKey", "PiotrMichalowski96_nba-mvp-ai-selector")
-        property("sonar.moduleKey", "pl.piter:commons-lib")
         property("sonar.organization", "piotrmichalowski96")
         property("sonar.host.url", "https://sonarcloud.io")
     }
