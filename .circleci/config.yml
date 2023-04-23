@@ -1,13 +1,12 @@
-version: 2.1
+version: 2
 
 jobs:
   build:
     environment:
-      # Configure the JVM and Gradle to avoid OOM errors
       _JAVA_OPTIONS: "-Xmx3g"
       GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
     docker:
-      - image: circleci/openjdk:11.0.3-jdk-stretch
+      - image: cimg/openjdk:17.0
     steps:
       - checkout
       - restore_cache:
@@ -34,7 +33,7 @@ jobs:
       _JAVA_OPTIONS: "-Xmx3g"
       GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
     docker:
-      - image: 'cimg/openjdk:17.0'
+      - image: cimg/openjdk:17.0
     steps:
       - checkout
       - attach_workspace:
@@ -49,6 +48,7 @@ jobs:
           when: always
 
 workflows:
+  version: 2
   main:
     jobs:
       - build:
