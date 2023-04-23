@@ -1,0 +1,17 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: 'cimg/openjdk:17.0'
+    steps:
+      - checkout
+      - run:
+          name: Run tests and Sonar Analysis
+          command: gradlew sonarqube
+
+workflows:
+  main:
+    jobs:
+      - build:
+          context: SonarCloud
