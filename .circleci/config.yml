@@ -49,9 +49,9 @@ jobs:
 
 workflows:
   version: 2
-  main:
+  workflow:
     jobs:
-      - build:
+      - build
       - test:
           requires:
             - build
