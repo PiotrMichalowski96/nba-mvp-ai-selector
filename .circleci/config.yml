@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run:
           name: Run tests and Sonar Analysis
-          command: gradlew sonarqube
+          command: ./gradlew sonarqube
 
 workflows:
   main:
