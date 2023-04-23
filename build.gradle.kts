@@ -5,6 +5,7 @@ plugins {
     kotlin("plugin.spring") version "1.7.22" apply false
     id("org.springframework.boot") version "3.0.6" apply false
     id("io.spring.dependency-management") version "1.1.0"
+    id("jacoco")
     id("org.sonarqube") version "4.0.0.2929"
 }
 
@@ -43,6 +44,10 @@ subprojects {
     }
 }
 
+jacoco {
+    toolVersion = "0.8.7"
+}
+
 sonarqube {
     properties {
         property("sonar.projectKey", "PiotrMichalowski96_nba-mvp-ai-selector")
@@ -51,6 +56,17 @@ sonarqube {
     }
 }
 
-tasks.sonar {
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
     dependsOn(tasks.test)
+    reports {
+        xml.required.set(true)
+    }
+}
+
+tasks.sonar {
+    dependsOn(tasks.jacocoTestReport)
 }
