@@ -31,14 +31,6 @@ subprojects {
         testImplementation("org.springframework.boot:spring-boot-starter-test")
     }
 
-    sonarqube {
-        properties {
-            property("sonar.projectKey", "PiotrMichalowski96_nba-mvp-ai-selector")
-            property("sonar.organization", "piotrmichalowski96")
-            property("sonar.host.url", "https://sonarcloud.io")
-        }
-    }
-
     tasks.withType<KotlinCompile> {
         kotlinOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
@@ -49,4 +41,16 @@ subprojects {
     tasks.withType<Test> {
         useJUnitPlatform()
     }
+}
+
+sonarqube {
+    properties {
+        property("sonar.projectKey", "PiotrMichalowski96_nba-mvp-ai-selector")
+        property("sonar.organization", "piotrmichalowski96")
+        property("sonar.host.url", "https://sonarcloud.io")
+    }
+}
+
+tasks.sonar {
+    dependsOn(tasks.test)
 }
