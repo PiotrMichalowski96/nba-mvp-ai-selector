@@ -1,0 +1,207 @@
+{
+  "date": "2023-04-21",
+  "league": {
+    "id": "4353138d-4c22-4396-95d8-5f587d2df25c",
+    "name": "NBA",
+    "alias": "NBA"
+  },
+  "games": [
+    {
+      "id": "2b07dbd1-ee88-411e-95f2-533755d65263",
+      "status": "closed",
+      "title": "Game 3",
+      "coverage": "full",
+      "scheduled": "2023-04-21T23:00:00Z",
+      "home_points": 130,
+      "away_points": 122,
+      "track_on_court": true,
+      "sr_id": "sr:match:40463221",
+      "reference": "0042200113",
+      "time_zones": {
+        "venue": "US/Eastern",
+        "home": "US/Eastern",
+        "away": "US/Eastern"
+      },
+      "venue": {
+        "id": "fd21f639-8a47-51ac-a5dd-590629d445cf",
+        "name": "State Farm Arena",
+        "capacity": 18118,
+        "address": "One Philips Drive",
+        "city": "Atlanta",
+        "state": "GA",
+        "zip": "30303",
+        "country": "USA",
+        "sr_id": "sr:venue:6916",
+        "location": {
+          "lat": "33.757162",
+          "lng": "-84.396352"
+        }
+      },
+      "broadcasts": [
+        {
+          "network": "ESPN",
+          "type": "TV",
+          "locale": "National",
+          "channel": "206"
+        },
+        {
+          "network": "BSSE",
+          "type": "TV",
+          "locale": "Home",
+          "channel": "649"
+        },
+        {
+          "network": "NBCS-BOS",
+          "type": "TV",
+          "locale": "Away",
+          "channel": "630"
+        }
+      ],
+      "home": {
+        "name": "Atlanta Hawks",
+        "alias": "ATL",
+        "id": "583ecb8f-fb46-11e1-82cb-f4ce4684ea4c",
+        "sr_id": "sr:team:3423",
+        "reference": "1610612737"
+      },
+      "away": {
+        "name": "Boston Celtics",
+        "alias": "BOS",
+        "id": "583eccfa-fb46-11e1-82cb-f4ce4684ea4c",
+        "sr_id": "sr:team:3422",
+        "reference": "1610612738"
+      }
+    },
+    {
+      "id": "2dd7c073-854a-48cc-8e37-49178cb63726",
+      "status": "closed",
+      "title": "Game 3",
+      "coverage": "full",
+      "scheduled": "2023-04-22T00:30:00Z",
+      "home_points": 99,
+      "away_points": 79,
+      "track_on_court": true,
+      "sr_id": "sr:match:40463317",
+      "reference": "0042200133",
+      "time_zones": {
+        "venue": "US/Eastern",
+        "home": "US/Eastern",
+        "away": "US/Eastern"
+      },
+      "venue": {
+        "id": "583152aa-de75-5bea-ac92-ac5b8a51f9f9",
+        "name": "Madison Square Garden",
+        "capacity": 19812,
+        "address": "4 Pennsylvania Plaza",
+        "city": "New York",
+        "state": "NY",
+        "zip": "10001",
+        "country": "USA",
+        "sr_id": "sr:venue:6054",
+        "location": {
+          "lat": "40.750496",
+          "lng": "-73.993447"
+        }
+      },
+      "broadcasts": [
+        {
+          "network": "ABC",
+          "type": "TV",
+          "locale": "National"
+        },
+        {
+          "network": "MSG",
+          "type": "TV",
+          "locale": "Home",
+          "channel": "634"
+        },
+        {
+          "network": "BSOH",
+          "type": "TV",
+          "locale": "Away",
+          "channel": "660"
+        }
+      ],
+      "home": {
+        "name": "New York Knicks",
+        "alias": "NYK",
+        "id": "583ec70e-fb46-11e1-82cb-f4ce4684ea4c",
+        "sr_id": "sr:team:3421",
+        "reference": "1610612752"
+      },
+      "away": {
+        "name": "Cleveland Cavaliers",
+        "alias": "CLE",
+        "id": "583ec773-fb46-11e1-82cb-f4ce4684ea4c",
+        "sr_id": "sr:team:3432",
+        "reference": "1610612739"
+      }
+    },
+    {
+      "id": "f2f46f70-0edb-4dfb-b3bb-51f85dda295a",
+      "status": "closed",
+      "title": "Game 3",
+      "coverage": "full",
+      "scheduled": "2023-04-22T01:30:00Z",
+      "home_points": 111,
+      "away_points": 120,
+      "track_on_court": true,
+      "sr_id": "sr:match:40463367",
+      "reference": "0042200143",
+      "time_zones": {
+        "venue": "US/Central",
+        "home": "US/Central",
+        "away": "US/Mountain"
+      },
+      "venue": {
+        "id": "7aed802e-3562-5b73-af1b-3859529f9b95",
+        "name": "Target Center",
+        "capacity": 19356,
+        "address": "600 First Avenue North",
+        "city": "Minneapolis",
+        "state": "MN",
+        "zip": "55403",
+        "country": "USA",
+        "sr_id": "sr:venue:6930",
+        "location": {
+          "lat": "44.979444",
+          "lng": "-93.276111"
+        }
+      },
+      "broadcasts": [
+        {
+          "network": "ESPN",
+          "type": "TV",
+          "locale": "National",
+          "channel": "206"
+        },
+        {
+          "network": "BSN",
+          "type": "TV",
+          "locale": "Home",
+          "channel": "668"
+        },
+        {
+          "network": "ALT",
+          "type": "TV",
+          "locale": "Away",
+          "channel": "681"
+        }
+      ],
+      "home": {
+        "name": "Minnesota Timberwolves",
+        "alias": "MIN",
+        "id": "583eca2f-fb46-11e1-82cb-f4ce4684ea4c",
+        "sr_id": "sr:team:3426",
+        "reference": "1610612750"
+      },
+      "away": {
+        "name": "Denver Nuggets",
+        "alias": "DEN",
+        "id": "583ed102-fb46-11e1-82cb-f4ce4684ea4c",
+        "sr_id": "sr:team:3417",
+        "reference": "1610612743"
+      }
+    }
+  ]
+}
