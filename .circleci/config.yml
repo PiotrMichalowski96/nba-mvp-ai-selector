@@ -30,6 +30,9 @@ jobs:
       - attach_workspace:
           at: .
       - run:
+          name: chmod permissions
+          command: chmod +x ./gradlew
+      - run:
           name: Run tests and Sonar analysis
           command: ./gradlew sonar
       - store_test_results:
