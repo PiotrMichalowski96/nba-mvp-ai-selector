@@ -1,6 +1,6 @@
-package pl.piter.commons.api.model.nba
+package pl.piter.commons.api.model.scores
 
-data class GameTimeZoneDTO(
+data class GameTimeZone(
     val venue: String,
     val home: String,
     val away: String,

@@ -1,6 +1,6 @@
-package pl.piter.commons.api.model.nba
+package pl.piter.commons.api.model.scores
 
-data class StatisticsDTO(
+data class Statistics(
     val points: Int,
     val assists: Int,
     val rebounds: Int,
