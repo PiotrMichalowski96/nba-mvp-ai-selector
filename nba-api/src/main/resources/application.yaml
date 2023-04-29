@@ -1,1 +1,7 @@
+#External NBA scores provider API - SportRadar
+nba-scores-provider.api:
+  url: https://api.sportradar.us/nba/trial/v8/en
+  key: ${api.key} #Paste here your SportRadar api key
 
+logging.level:
+  pl.piter.nba.api.rest: DEBUG
