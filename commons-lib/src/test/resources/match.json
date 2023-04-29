@@ -1,0 +1,102 @@
+{
+  "id": "2b07dbd1-ee88-411e-95f2-533755d65263",
+  "status": "closed",
+  "scheduled": "2023-04-21T23:00:00+00:00",
+  "time_zones": {
+    "venue": "US/Eastern",
+    "home": "US/Eastern",
+    "away": "US/Eastern"
+  },
+  "home": {
+    "name": "Hawks",
+    "market": "Atlanta",
+    "points": 130,
+    "leaders": {
+      "points": [
+        {
+          "full_name": "Trae Young",
+          "id": "cf418e0c-de9d-438f-a1ac-3be539a56c42",
+          "statistics": {
+            "rebounds": 6,
+            "assists": 9,
+            "steals": 1,
+            "blocks": 2,
+            "points": 32
+          }
+        }
+      ],
+      "rebounds": [
+        {
+          "full_name": "Clint Capela",
+          "id": "c37dafbb-a269-41f6-813f-bdb4da388203",
+          "statistics": {
+            "rebounds": 11,
+            "assists": 0,
+            "steals": 1,
+            "blocks": 0,
+            "points": 10
+          }
+        }
+      ],
+      "assists": [
+        {
+          "full_name": "Trae Young",
+          "id": "cf418e0c-de9d-438f-a1ac-3be539a56c42",
+          "statistics": {
+            "rebounds": 6,
+            "assists": 9,
+            "steals": 1,
+            "blocks": 2,
+            "points": 32
+          }
+        }
+      ]
+    }
+  },
+  "away": {
+    "name": "Celtics",
+    "market": "Boston",
+    "points": 122,
+    "leaders": {
+      "points": [
+        {
+          "full_name": "Jayson Tatum",
+          "id": "98136da3-452f-49dc-a794-1ee9c76443f2",
+          "statistics": {
+            "rebounds": 10,
+            "assists": 5,
+            "steals": 2,
+            "blocks": 0,
+            "points": 29
+          }
+        }
+      ],
+      "rebounds": [
+        {
+          "full_name": "Jayson Tatum",
+          "id": "98136da3-452f-49dc-a794-1ee9c76443f2",
+          "statistics": {
+            "rebounds": 10,
+            "assists": 5,
+            "steals": 2,
+            "blocks": 0,
+            "points": 29
+          }
+        }
+      ],
+      "assists": [
+        {
+          "full_name": "Marcus Smart",
+          "id": "af460d21-b1d8-46bb-a228-61ac4fb9ccf9",
+          "statistics": {
+            "rebounds": 3,
+            "assists": 8,
+            "steals": 3,
+            "blocks": 0,
+            "points": 24
+          }
+        }
+      ]
+    }
+  }
+}
