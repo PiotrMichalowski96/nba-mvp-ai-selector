@@ -18,7 +18,9 @@ interface NbaScoresProviderApiClient {
     fun findGame(@PathVariable id: String): GameResponse
 
     @GetMapping("/games/{year}/{month}/{day}/schedule.json")
-    fun findGameList(@PathVariable year: Int,
-                     @PathVariable month: Int,
-                     @PathVariable day: Int): GameListResponse
+    fun findGameList(
+        @PathVariable year: Int,
+        @PathVariable month: Int,
+        @PathVariable day: Int
+    ): GameListResponse
 }

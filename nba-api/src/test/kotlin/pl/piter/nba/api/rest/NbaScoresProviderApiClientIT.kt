@@ -25,9 +25,7 @@ class NbaScoresProviderApiClientIT(@Autowired val apiClient: NbaScoresProviderAp
         val actualGame: GameResponse = apiClient.findGame(gameId)
 
         //then
-        assertThat(actualGame)
-                .usingRecursiveComparison()
-                .isEqualTo(expectedGame)
+        assertThat(actualGame).isEqualTo(expectedGame)
     }
 
     @Test
@@ -44,8 +42,6 @@ class NbaScoresProviderApiClientIT(@Autowired val apiClient: NbaScoresProviderAp
         val actualGameList: GameListResponse = apiClient.findGameList(year, month, day)
 
         //then
-        assertThat(actualGameList)
-                .usingRecursiveComparison()
-                .isEqualTo(expectedGameList)
+        assertThat(actualGameList).isEqualTo(expectedGameList)
     }
 }

@@ -16,9 +16,9 @@ object JsonConverter {
     }
 
     fun readFileAsString(filePath: String) = File(filePath)
-            .inputStream()
-            .readBytes()
-            .toString(Charsets.UTF_8)
+        .inputStream()
+        .readBytes()
+        .toString(Charsets.UTF_8)
 
     inline fun <reified T> readJsonFile(filePath: String): T {
         val json: String = readFileAsString(filePath)
