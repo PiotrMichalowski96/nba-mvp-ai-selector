@@ -30,13 +30,13 @@ import java.time.LocalDate
 class ScoreApiServiceTest {
 
     @MockBean
-    lateinit var apiClient: NbaScoresProviderApiClient
+    private lateinit var apiClient: NbaScoresProviderApiClient
 
     @Autowired
-    lateinit var scoreApiService: ScoreApiService
+    private lateinit var scoreApiService: ScoreApiService
 
     @Autowired
-    lateinit var cacheManager: CacheManager
+    private lateinit var cacheManager: CacheManager
 
     @Test
     fun `given game id when call get game endpoint then return game`() {

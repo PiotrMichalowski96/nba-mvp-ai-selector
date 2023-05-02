@@ -2,6 +2,7 @@ package pl.piter.nba.api.rest
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Import
@@ -10,9 +11,10 @@ import pl.piter.commons.api.model.scores.GameResponse
 import pl.piter.commons.util.JsonConverter
 import pl.piter.nba.api.config.FeignConfig
 
+@EnabledIfEnvironmentVariable(named = "API_KEY", matches = "^(?=\\s*\\S).*$", disabledReason = "API Key must not be blank")
 @SpringBootTest
 @Import(FeignConfig::class)
-class NbaScoresProviderApiClientIT(@Autowired val apiClient: NbaScoresProviderApiClient) {
+class NbaScoresProviderApiClientIT(@Autowired private val apiClient: NbaScoresProviderApiClient) {
 
     @Test
     fun `given game id when call external API get game by id then return expected game`() {
