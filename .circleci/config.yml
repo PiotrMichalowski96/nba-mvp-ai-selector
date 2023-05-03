@@ -22,7 +22,7 @@ jobs:
   test:
     environment:
       _JAVA_OPTIONS: "-Xmx3g"
-      GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
+      GRADLE_OPTS: "-Dorg.gradle.daemon=true -Dorg.gradle.workers.max=2"
     docker:
       - image: cimg/openjdk:17.0
     steps:
@@ -36,9 +36,9 @@ jobs:
           name: Run tests and Sonar analysis
           command: ./gradlew test jacocoRootReport sonar
       - store_test_results:
-          path: build/test-results/test
+          path: build/reports/jacoco/test
       - store_artifacts:
-          path: build/test-results/test
+          path: build/reports
           when: always
 
 workflows:

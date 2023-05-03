@@ -12,9 +12,6 @@ plugins {
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 allprojects {
-    apply(plugin = "org.sonarqube")
-    apply(plugin = "jacoco")
-
     group = "pl.piter"
     version = "0.0.1-SNAPSHOT"
 
@@ -28,6 +25,12 @@ subprojects {
     apply(plugin = "org.jetbrains.kotlin.plugin.spring")
     apply(plugin = "org.springframework.boot")
     apply(plugin = "io.spring.dependency-management")
+    apply(plugin = "org.sonarqube")
+    apply(plugin = "jacoco")
+
+    jacoco {
+        toolVersion = "0.8.7"
+    }
 
     dependencies {
         implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -46,10 +49,18 @@ subprojects {
     tasks.withType<Test> {
         useJUnitPlatform()
     }
-}
 
-jacoco {
-    toolVersion = "0.8.7"
+    tasks.test {
+        finalizedBy(tasks.jacocoTestReport)
+    }
+
+    tasks.jacocoTestReport {
+        dependsOn(tasks.test)
+        reports {
+            xml.required.set(true)
+            xml.outputLocation.set(file("$buildDir/reports/jacoco/test/jacocoTestReport.xml"))
+        }
+    }
 }
 
 sonarqube {
@@ -57,23 +68,17 @@ sonarqube {
         property("sonar.projectKey", "PiotrMichalowski96_nba-mvp-ai-selector")
         property("sonar.organization", "piotrmichalowski96")
         property("sonar.host.url", "https://sonarcloud.io")
-        property("sonar.coverage.jacoco.xmlReportPaths", "${project.buildDir}/reports/jacoco/jacocoRootReport/jacocoRootReport.xml")
-    }
-}
-
-tasks.test {
-    finalizedBy(tasks.jacocoTestReport)
-}
-
-tasks.jacocoTestReport {
-    dependsOn(tasks.test)
-    reports {
-        xml.required.set(true)
+        property("sonar.coverage.exclusions", "**/config/*, **/exception/*, **/model/*, **/domain/*")
     }
 }
 
 tasks.register<JacocoReport>("jacocoRootReport") {
     dependsOn(tasks.test)
+
+    reports {
+        xml.required.set(true)
+        xml.outputLocation.set(file("$buildDir/reports/jacoco/test/jacocoTestReport.xml"))
+    }
 
     subprojects {
         this@subprojects.plugins.withType<JacocoPlugin>().configureEach {
@@ -82,9 +87,6 @@ tasks.register<JacocoReport>("jacocoRootReport") {
             }.configureEach {
                 sourceSets(this@subprojects.the<SourceSetContainer>().named("main").get())
                 executionData(this)
-                reports {
-                    xml.required.set(true)
-                }
             }
         }
     }
