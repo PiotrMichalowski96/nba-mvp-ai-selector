@@ -36,7 +36,7 @@ jobs:
           name: Run tests and Sonar analysis
           command: ./gradlew test jacocoRootReport sonar
       - store_test_results:
-          path: build/reports
+          path: build/reports/jacoco/test
       - store_artifacts:
           path: build/reports
           when: always
