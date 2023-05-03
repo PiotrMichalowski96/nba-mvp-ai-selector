@@ -68,7 +68,7 @@ sonarqube {
         property("sonar.projectKey", "PiotrMichalowski96_nba-mvp-ai-selector")
         property("sonar.organization", "piotrmichalowski96")
         property("sonar.host.url", "https://sonarcloud.io")
-        property("sonar.coverage.exclusions", "**/config/*, **/exception/*, **/model/*, **/domain/*")
+        property("sonar.coverage.exclusions", "**/config/*, **/exception/*, **/model/**, **/domain/*")
     }
 }
 
