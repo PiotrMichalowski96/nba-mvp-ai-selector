@@ -12,6 +12,9 @@ plugins {
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 allprojects {
+    apply(plugin = "org.sonarqube")
+    apply(plugin = "jacoco")
+
     group = "pl.piter"
     version = "0.0.1-SNAPSHOT"
 
@@ -25,10 +28,11 @@ subprojects {
     apply(plugin = "org.jetbrains.kotlin.plugin.spring")
     apply(plugin = "org.springframework.boot")
     apply(plugin = "io.spring.dependency-management")
-    apply(plugin = "org.sonarqube")
 
     dependencies {
         implementation("org.jetbrains.kotlin:kotlin-reflect")
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+        implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
         testImplementation("org.springframework.boot:spring-boot-starter-test")
     }
 
@@ -53,6 +57,7 @@ sonarqube {
         property("sonar.projectKey", "PiotrMichalowski96_nba-mvp-ai-selector")
         property("sonar.organization", "piotrmichalowski96")
         property("sonar.host.url", "https://sonarcloud.io")
+        property("sonar.coverage.jacoco.xmlReportPaths", "${project.buildDir}/reports/jacoco/jacocoRootReport/jacocoRootReport.xml")
     }
 }
 
@@ -67,6 +72,24 @@ tasks.jacocoTestReport {
     }
 }
 
+tasks.register<JacocoReport>("jacocoRootReport") {
+    dependsOn(tasks.test)
+
+    subprojects {
+        this@subprojects.plugins.withType<JacocoPlugin>().configureEach {
+            this@subprojects.tasks.matching {
+                it.extensions.findByType<JacocoTaskExtension>() != null
+            }.configureEach {
+                sourceSets(this@subprojects.the<SourceSetContainer>().named("main").get())
+                executionData(this)
+                reports {
+                    xml.required.set(true)
+                }
+            }
+        }
+    }
+}
+
 tasks.sonar {
-    dependsOn(tasks.jacocoTestReport)
+    dependsOn(tasks.named("jacocoRootReport"))
 }
