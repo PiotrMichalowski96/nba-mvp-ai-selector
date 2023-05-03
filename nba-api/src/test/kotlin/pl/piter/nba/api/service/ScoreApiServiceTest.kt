@@ -4,6 +4,8 @@ import feign.FeignException
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.condition.EnabledOnOs
+import org.junit.jupiter.api.condition.OS
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.BDDMockito.given
 import org.mockito.Mockito.*
@@ -24,6 +26,7 @@ import pl.piter.nba.api.rest.NbaScoresProviderApiClient
 import pl.piter.nba.api.util.RedisExtension
 import java.time.LocalDate
 
+@EnabledOnOs(OS.WINDOWS)
 @ExtendWith(SpringExtension::class, RedisExtension::class)
 @Import(ScoreApiService::class, CacheConfig::class)
 @ImportAutoConfiguration(CacheAutoConfiguration::class, RedisAutoConfiguration::class)
