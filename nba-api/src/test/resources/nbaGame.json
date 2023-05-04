@@ -1,0 +1,10 @@
+{
+  "id": "2b07dbd1-ee88-411e-95f2-533755d65263",
+  "homeTeam": "Atlanta Hawks",
+  "awayTeam": "Boston Celtics",
+  "startTime": "2023-04-21T23:00:00+00:00",
+  "gameResult": {
+    "homeTeamPoints": 130,
+    "awayTeamPoints": 122
+  }
+}

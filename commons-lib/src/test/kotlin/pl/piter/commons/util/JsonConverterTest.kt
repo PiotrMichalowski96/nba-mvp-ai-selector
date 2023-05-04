@@ -2,6 +2,7 @@ package pl.piter.commons.util
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import pl.piter.commons.api.model.nba.NbaGame
 import pl.piter.commons.api.model.scores.GameResponse
 
 class JsonConverterTest {
@@ -28,5 +29,19 @@ class JsonConverterTest {
 
         //then
         assertThat(convertedObj).isNotNull
+    }
+
+    @Test
+    fun `given file in resources when convert json array then return list of object`() {
+        //given
+        val filePath = "src/test/resources/nbaGameList.json"
+
+        //when
+        val convertedList: List<NbaGame> = JsonConverter.readJsonArrayFile(filePath)
+
+        //then
+        assertThat(convertedList)
+            .hasSize(3)
+            .hasOnlyElementsOfType(NbaGame::class.java)
     }
 }
