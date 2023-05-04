@@ -36,7 +36,10 @@ subprojects {
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
-        testImplementation("org.springframework.boot:spring-boot-starter-test")
+        testImplementation("org.springframework.boot:spring-boot-starter-test") {
+            exclude("org.mockito:mockito-core")
+        }
+        testImplementation("com.ninja-squad:springmockk:4.0.2")
     }
 
     tasks.withType<KotlinCompile> {

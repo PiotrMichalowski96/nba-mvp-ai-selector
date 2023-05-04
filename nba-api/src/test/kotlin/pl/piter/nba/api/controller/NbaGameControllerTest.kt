@@ -1,10 +1,10 @@
 package pl.piter.nba.api.controller
 
+import com.ninjasquad.springmockk.MockkBean
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.context.annotation.Import
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
@@ -25,7 +25,7 @@ import java.time.format.DateTimeFormatter
 @Import(NbaGameService::class, ScoreApiService::class)
 class NbaGameControllerTest(@Autowired private val mockMvc: MockMvc) {
 
-    @MockBean
+    @MockkBean
     private lateinit var apiClient: NbaScoresProviderApiClient
 
     private lateinit var mockedExternalAPI: MockedExternalAPI

@@ -1,12 +1,12 @@
 package pl.piter.nba.api.service
 
+import com.ninjasquad.springmockk.MockkBean
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.context.annotation.Import
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import pl.piter.commons.api.model.nba.NbaGame
@@ -23,7 +23,7 @@ import java.time.LocalDate
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class NbaGameServiceTest {
 
-    @MockBean
+    @MockkBean
     private lateinit var apiClient: NbaScoresProviderApiClient
 
     @Autowired

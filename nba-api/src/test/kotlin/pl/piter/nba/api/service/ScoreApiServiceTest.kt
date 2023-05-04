@@ -1,17 +1,17 @@
 package pl.piter.nba.api.service
 
+import com.ninjasquad.springmockk.MockkBean
+import io.mockk.verify
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.Mockito.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration
 import org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.cache.CacheManager
 import org.springframework.context.annotation.Import
 import org.springframework.test.context.junit.jupiter.SpringExtension
@@ -32,7 +32,7 @@ import java.time.LocalDate
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ScoreApiServiceTest {
 
-    @MockBean
+    @MockkBean
     private lateinit var apiClient: NbaScoresProviderApiClient
 
     @Autowired
@@ -111,7 +111,7 @@ class ScoreApiServiceTest {
         assertThat(responseCacheMiss).isEqualTo(response)
         assertThat(responseCacheHit).isEqualTo(response)
 
-        verify(apiClient, times(1)).findGame(id)
+        verify(exactly = 1) { apiClient.findGame(id) }
         assertThat(responseFromCache(id)).isEqualTo(response)
     }
 
