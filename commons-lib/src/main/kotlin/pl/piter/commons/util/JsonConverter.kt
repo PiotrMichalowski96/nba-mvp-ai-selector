@@ -2,6 +2,7 @@ package pl.piter.commons.util
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.type.CollectionType
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import java.io.File
@@ -25,4 +26,9 @@ object JsonConverter {
         return objectMapper.readValue(json, T::class.java)
     }
 
+    inline fun <reified T> readJsonArrayFile(filePath: String): List<T> {
+        val json: String = readFileAsString(filePath)
+        val collectionType: CollectionType = objectMapper.typeFactory.constructCollectionType(List::class.java, T::class.java)
+        return objectMapper.readValue(json, collectionType)
+    }
 }
