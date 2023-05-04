@@ -1,0 +1,52 @@
+{
+	"info": {
+		"_postman_id": "af7e3f49-ba8c-4db9-90b0-800c9d625394",
+		"name": "nba-mvp-ai-selector",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get NBA game by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/nba-game/08566915-257a-4109-b1df-96757a0b9434",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"nba-game",
+						"08566915-257a-4109-b1df-96757a0b9434"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get NBA games list by date",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/nba-game?game-time=2023-05-02",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"nba-game"
+					],
+					"query": [
+						{
+							"key": "game-time",
+							"value": "2023-05-02"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

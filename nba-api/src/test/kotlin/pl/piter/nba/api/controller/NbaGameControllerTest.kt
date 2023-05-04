@@ -45,7 +45,7 @@ class NbaGameControllerTest(@Autowired private val mockMvc: MockMvc) {
         mockedExternalAPI.mockGetGameEndpoint(id, gameResponse)
 
         //whenThen
-        mockMvc.perform(get("/game/$id"))
+        mockMvc.perform(get("/nba-game/$id"))
             .andExpect(status().isOk)
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.homeTeam").value("Atlanta Hawks"))
@@ -61,8 +61,8 @@ class NbaGameControllerTest(@Autowired private val mockMvc: MockMvc) {
         mockedExternalAPI.mockGetGameListEndpoint(gameTime, gameListResponse)
 
         //whenThen
-        mockMvc.perform(get("/game")
-            .param("gameTime", gameTime.format(DateTimeFormatter.ISO_DATE)))
+        mockMvc.perform(get("/nba-game")
+            .param("game-time", gameTime.format(DateTimeFormatter.ISO_DATE)))
             .andExpect(status().isOk)
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.length()").value(3))

@@ -11,18 +11,18 @@ import java.time.LocalDate
 @RestController
 class NbaGameController(private val nbaGameService: NbaGameService) {
 
-    @GetMapping("/game/{id}")
+    @GetMapping("/nba-game/{id}")
     fun getGame(@PathVariable id: String): NbaGame {
         require(id.isNotBlank())
         return nbaGameService.getGameById(id)
     }
 
-    @GetMapping("/game")
-    fun getGameList(@RequestParam gameTime: LocalDate): List<NbaGame> {
-        return nbaGameService.getGameListByTime(gameTime)
+    @GetMapping("/nba-game")
+    fun getGameList(@RequestParam(required = false, name = "game-time") gameTime: LocalDate?): List<NbaGame> {
+        return nbaGameService.getGameListByTime(gameTime ?: LocalDate.now())
     }
 
-    @GetMapping("/game/{id}/mvp")
+    @GetMapping("/nba-game/{id}/mvp")
     fun getMVP() {
         TODO("to implement later")
     }
