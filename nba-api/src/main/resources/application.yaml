@@ -11,5 +11,11 @@ nba-scores-provider.api:
   url: https://api.sportradar.us/nba/trial/v8/en
   key: ${api.key} #Paste here your SportRadar api key
 
+kafka:
+  bootstrapAddress: 127.0.0.1:9092
+  topic:
+    match: match-test-v1
+    mvp: mvp-test-v1
+
 logging.level:
   pl.piter.nba.api.rest: DEBUG
