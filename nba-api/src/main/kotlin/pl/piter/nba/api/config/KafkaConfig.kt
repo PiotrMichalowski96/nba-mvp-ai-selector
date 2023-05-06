@@ -7,16 +7,17 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.kafka.annotation.EnableKafka
 import org.springframework.kafka.annotation.EnableKafkaStreams
+import org.springframework.kafka.annotation.KafkaStreamsDefaultConfiguration
 import org.springframework.kafka.config.KafkaStreamsConfiguration
 import org.springframework.kafka.support.serializer.JsonSerde
 
 @Configuration
 @EnableKafka
 @EnableKafkaStreams
-class KafkaConfig(@Value("\$kafka.bootstrapAddress") private val bootstrapAddress: String,
-                  @Value("\$spring.application.name") private val appName: String) {
+class KafkaConfig(@Value("\${spring.kafka.bootstrap-servers}") private val bootstrapAddress: String,
+                  @Value("\${spring.application.name}") private val appName: String) {
 
-    @Bean
+    @Bean(name = [KafkaStreamsDefaultConfiguration.DEFAULT_STREAMS_CONFIG_BEAN_NAME])
     fun streamsConfig(): KafkaStreamsConfiguration {
         val properties = mutableMapOf<String, Any>()
         properties[BOOTSTRAP_SERVERS_CONFIG] = bootstrapAddress

@@ -14,15 +14,14 @@ import pl.piter.commons.api.model.scores.GameListResponse
 import pl.piter.commons.api.model.scores.GameResponse
 import pl.piter.commons.util.JsonConverter
 import pl.piter.commons.util.generateId
+import pl.piter.nba.api.config.TestConfig
 import pl.piter.nba.api.rest.NbaScoresProviderApiClient
-import pl.piter.nba.api.service.NbaGameService
-import pl.piter.nba.api.service.ScoreApiService
 import pl.piter.nba.api.util.MockedExternalAPI
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 @WebMvcTest(NbaGameController::class)
-@Import(NbaGameService::class, ScoreApiService::class)
+@Import(TestConfig::class)
 class NbaGameControllerTest(@Autowired private val mockMvc: MockMvc) {
 
     @MockkBean
