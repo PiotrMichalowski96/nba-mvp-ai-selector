@@ -7,7 +7,7 @@ import pl.piter.commons.api.model.scores.GameListResponse
 import pl.piter.commons.api.model.scores.GameResponse
 import pl.piter.commons.util.JsonConverter
 
-class NbaGameMapperTest {
+class GameMapperTest {
 
     @Test
     fun `given game response when mapped then return nba game`() {
