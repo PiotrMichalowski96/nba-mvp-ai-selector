@@ -1,5 +1,5 @@
 extra["springCloudVersion"] = "2022.0.2"
-extra["kafkaVersion"] = "3.4.0"
+extra["kafkaVersion"] = "3.3.2"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
