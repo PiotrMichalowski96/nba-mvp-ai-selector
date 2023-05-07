@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import pl.piter.commons.api.model.nba.NbaGame
 import pl.piter.commons.api.model.scores.GameListResponse
 import pl.piter.commons.api.model.scores.GameResponse
+import pl.piter.commons.domain.NbaGameEvent
 import pl.piter.commons.util.JsonConverter
 
 class GameMapperTest {
@@ -39,5 +40,21 @@ class GameMapperTest {
 
         //then
         assertThat(actualNbaGames).containsExactlyElementsOf(expectedNbaGames)
+    }
+
+    @Test
+    fun `given game response when mapped to event then return nba game event`() {
+        //given
+        val gameResponseSample = "src/test/resources/gameById.json"
+        val gameResponse: GameResponse = JsonConverter.readJsonFile(gameResponseSample)
+
+        val expectedNbaEventSample = "src/test/resources/nbaGameEvent.json"
+        val expectedEvent: NbaGameEvent = JsonConverter.readJsonFile(expectedNbaEventSample)
+
+        //when
+        val actualEvent: NbaGameEvent = gameResponse.toNbaGameEvent()
+
+        //then
+        assertThat(actualEvent).isEqualTo(expectedEvent)
     }
 }

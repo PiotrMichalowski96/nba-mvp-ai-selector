@@ -1,0 +1,56 @@
+{
+  "gameId": "2b07dbd1-ee88-411e-95f2-533755d65263",
+  "homeTeam": "Atlanta Hawks",
+  "awayTeam": "Boston Celtics",
+  "startTime": "2023-04-21T23:00:00+00:00",
+  "gameResult": {
+    "homeTeamPoints": 130,
+    "awayTeamPoints": 122
+  },
+  "bestPlayers": [
+    {
+      "name": "Trae Young",
+      "team": "Hawks",
+      "stats": {
+        "points": 32,
+        "assists": 9,
+        "rebounds": 6,
+        "steals": 1,
+        "blocks": 2
+      }
+    },
+    {
+      "name": "Clint Capela",
+      "team": "Hawks",
+      "stats": {
+        "points": 10,
+        "assists": 0,
+        "rebounds": 11,
+        "steals": 1,
+        "blocks": 0
+      }
+    },
+    {
+      "name": "Jayson Tatum",
+      "team": "Celtics",
+      "stats": {
+        "points": 29,
+        "assists": 5,
+        "rebounds": 10,
+        "steals": 2,
+        "blocks": 0
+      }
+    },
+    {
+      "name": "Marcus Smart",
+      "team": "Celtics",
+      "stats": {
+        "points": 24,
+        "assists": 8,
+        "rebounds": 3,
+        "steals": 3,
+        "blocks": 0
+      }
+    }
+  ]
+}

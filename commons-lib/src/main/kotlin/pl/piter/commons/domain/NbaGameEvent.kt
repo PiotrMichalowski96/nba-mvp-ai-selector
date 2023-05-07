@@ -1,6 +1,7 @@
 package pl.piter.commons.domain
 
 import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.NotEmpty
 import java.time.OffsetDateTime
 
 data class NbaGameEvent(
@@ -9,5 +10,5 @@ data class NbaGameEvent(
     @field:NotBlank val awayTeam: String,
     val startTime: OffsetDateTime,
     val gameResult: GameResult,
-    val bestPlayers: List<Player>,
+    @field:NotEmpty val bestPlayers: Set<Player>,
 )
