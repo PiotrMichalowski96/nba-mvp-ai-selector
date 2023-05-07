@@ -15,9 +15,11 @@ import pl.piter.commons.api.model.nba.NbaGameMvp
 import pl.piter.commons.domain.MvpEvent
 import pl.piter.nba.api.config.TopicProperties
 import pl.piter.nba.api.mapper.toNbaGameMvp
+import pl.piter.nba.api.validation.AnnotationValidator
 
 @Component
-class MvpTopology(private val topicProperties: TopicProperties) {
+class MvpTopology(private val topicProperties: TopicProperties,
+                  private val validator: AnnotationValidator) {
 
     companion object {
         const val MVP_STORE = "mvp-store"
@@ -29,7 +31,7 @@ class MvpTopology(private val topicProperties: TopicProperties) {
         val storeSupplier: KeyValueBytesStoreSupplier = Stores.persistentKeyValueStore(MVP_STORE)
 
         mvpEvents(streamsBuilder)
-            .filter { key, value -> true } //TODO validation
+            .filter { _, mvpEvent -> validator.validate(mvpEvent) }
             .mapValues { v -> v.toNbaGameMvp() }
             .toTable(
                 Materialized.`as`<String, NbaGameMvp>(storeSupplier)
