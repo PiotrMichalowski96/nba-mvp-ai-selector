@@ -11,8 +11,10 @@ import org.springframework.kafka.core.KafkaAdmin
 
 @Configuration
 @EnableConfigurationProperties(value = [TopicProperties::class])
-class TopicConfig(@Value("\${spring.kafka.bootstrap-servers}") private val bootstrapAddress: String,
-                  private val topicProperties: TopicProperties) {
+class TopicConfig(
+    @Value("\${spring.kafka.bootstrap-servers}") private val bootstrapAddress: String,
+    private val topicProperties: TopicProperties
+) {
 
     @Bean
     fun kafkaAdmin(): KafkaAdmin {

@@ -18,8 +18,10 @@ import pl.piter.nba.api.mapper.toNbaGameMvp
 import pl.piter.nba.api.validation.AnnotationValidator
 
 @Component
-class MvpTopology(private val topicProperties: TopicProperties,
-                  private val validator: AnnotationValidator) {
+class MvpTopology(
+    private val topicProperties: TopicProperties,
+    private val validator: AnnotationValidator
+) {
 
     companion object {
         const val MVP_STORE = "mvp-store"
