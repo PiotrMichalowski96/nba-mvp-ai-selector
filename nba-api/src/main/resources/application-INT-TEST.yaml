@@ -1,3 +1,5 @@
+server.port: 8081
+
 nba-scores-provider.api:
   url: dummy-url
   key: dummy-key
