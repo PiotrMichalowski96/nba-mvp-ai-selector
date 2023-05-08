@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Import
 import org.springframework.test.context.junit.jupiter.SpringExtension
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean
 import pl.piter.commons.api.model.nba.NbaGame
 import pl.piter.commons.api.model.scores.GameListResponse
 import pl.piter.commons.api.model.scores.GameResponse
@@ -20,7 +21,7 @@ import pl.piter.nba.api.util.MockedExternalAPI
 import java.time.LocalDate
 
 @ExtendWith(SpringExtension::class)
-@Import(TestConfig::class)
+@Import(TestConfig::class, LocalValidatorFactoryBean::class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class NbaGameServiceTest {
 
