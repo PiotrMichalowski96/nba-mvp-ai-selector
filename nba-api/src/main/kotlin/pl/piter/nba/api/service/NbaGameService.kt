@@ -55,7 +55,7 @@ class NbaGameService(
         val mvpStore: ReadOnlyKeyValueStore<String, NbaGameMvp> = kafkaStreams.store(
             StoreQueryParameters.fromNameAndType(MVP_STORE, QueryableStoreTypes.keyValueStore())
         )
-        return mvpStore.get(id)
+        return mvpStore[id]
     }
 
     private fun checkIfMvpExists(id: String) = fetchFromStoreBy(id) != null
