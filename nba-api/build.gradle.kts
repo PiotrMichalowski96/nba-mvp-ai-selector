@@ -12,6 +12,7 @@ dependencies {
     implementation(project(":commons-lib"))
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.kafka:spring-kafka-test")
+    testImplementation("org.awaitility:awaitility-kotlin:4.2.0")
     testImplementation("it.ozimov:embedded-redis:0.7.3") {
         exclude("commons-logging", "commons-logging")
         exclude("org.slf4j", "slf4j-simple")
