@@ -3,6 +3,7 @@ package pl.piter.nba.api.config
 import org.apache.kafka.common.serialization.Serdes
 import org.apache.kafka.streams.StreamsConfig.*
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.kafka.annotation.EnableKafka
@@ -14,6 +15,7 @@ import org.springframework.kafka.support.serializer.JsonSerde
 @Configuration
 @EnableKafka
 @EnableKafkaStreams
+@EnableConfigurationProperties(value = [TopicProperties::class])
 class KafkaConfig(
     @Value("\${spring.kafka.bootstrap-servers}") private val bootstrapAddress: String,
     @Value("\${spring.application.name}") private val appName: String
