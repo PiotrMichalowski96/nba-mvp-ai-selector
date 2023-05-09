@@ -4,12 +4,18 @@ spring.data.redis:
   host: localhost
   port: 6379
 
+spring.kafka.bootstrap-servers: localhost:9092
+
 cache.timeoutInMinutes: 60
 
 #External NBA scores provider API - SportRadar
 nba-scores-provider.api:
   url: https://api.sportradar.us/nba/trial/v8/en
   key: ${api.key} #Paste here your SportRadar api key
+
+topic:
+  match: match-test-v1
+  mvp: mvp-test-v1
 
 logging.level:
   pl.piter.nba.api.rest: DEBUG

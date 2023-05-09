@@ -25,6 +25,46 @@
 			"response": []
 		},
 		{
+			"name": "Get MVP",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/nba-game/2b07dbd1-ee88-411e-95f2-533755d65263/mvp",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"nba-game",
+						"2b07dbd1-ee88-411e-95f2-533755d65263",
+						"mvp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Evaluate MVP",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/nba-game/77592882-dc20-4ec9-862b-5f8d9d0a586d/mvp",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"nba-game",
+						"77592882-dc20-4ec9-862b-5f8d9d0a586d",
+						"mvp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get NBA games list by date",
 			"request": {
 				"method": "GET",

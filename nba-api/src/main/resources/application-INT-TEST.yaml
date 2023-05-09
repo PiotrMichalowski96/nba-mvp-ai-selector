@@ -1,0 +1,9 @@
+server.port: 8081
+
+nba-scores-provider.api:
+  url: dummy-url
+  key: dummy-key
+
+topic:
+  match: match-int-test-v1
+  mvp: mvp-int-test-v1
