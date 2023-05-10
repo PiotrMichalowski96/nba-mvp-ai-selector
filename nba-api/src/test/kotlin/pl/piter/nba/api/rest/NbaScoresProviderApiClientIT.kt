@@ -11,7 +11,11 @@ import pl.piter.commons.api.model.scores.GameResponse
 import pl.piter.commons.util.JsonConverter
 import pl.piter.nba.api.config.FeignConfig
 
-@EnabledIfEnvironmentVariable(named = "API_KEY", matches = "^(?=\\s*\\S).*$", disabledReason = "API Key must not be blank")
+@EnabledIfEnvironmentVariable(
+    named = "API_KEY",
+    matches = "^(?=\\s*\\S).*$",
+    disabledReason = "API Key must not be blank"
+)
 @SpringBootTest
 @Import(FeignConfig::class)
 class NbaScoresProviderApiClientIT(@Autowired private val apiClient: NbaScoresProviderApiClient) {

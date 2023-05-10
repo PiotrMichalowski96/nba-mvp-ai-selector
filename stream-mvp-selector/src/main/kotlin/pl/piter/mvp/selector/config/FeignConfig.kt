@@ -1,4 +1,4 @@
-package pl.piter.nba.api.config
+package pl.piter.mvp.selector.config
 
 import feign.Logger
 import feign.RequestInterceptor
@@ -7,11 +7,15 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-class FeignConfig(@Value("\${nba-scores-provider.api.key}") private val apiKey: String) {
+class FeignConfig(@Value("\${chat-gpt.api.key}") private val apiKey: String) {
+
+    companion object {
+        private const val HEADER_AUTHORIZATION = "Authorization"
+    }
 
     @Bean
     fun authInterceptor(): RequestInterceptor = RequestInterceptor {
-        it.query("api_key", apiKey)
+        it.header(HEADER_AUTHORIZATION, "Bearer $apiKey")
     }
 
     @Bean

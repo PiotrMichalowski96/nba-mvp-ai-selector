@@ -1,1 +1,13 @@
+spring.application.name: stream-mvp-selector
 
+#External ChatGPT API
+chat-gpt.api:
+  url: https://api.openai.com/v1
+  key: ${chat-gpt-api.key} #Paste here your ChatGPT api key
+
+topic:
+  match: match-test-v1
+  mvp: mvp-test-v1
+
+logging.level:
+  pl.piter.mvp.selector.rest: DEBUG
