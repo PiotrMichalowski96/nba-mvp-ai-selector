@@ -10,14 +10,10 @@ import org.springframework.context.annotation.Configuration
 class FeignConfig(@Value("\${nba-scores-provider.api.key}") private val apiKey: String) {
 
     @Bean
-    fun authInterceptor(): RequestInterceptor {
-        return RequestInterceptor {
-            it.query("api_key", apiKey)
-        }
+    fun authInterceptor(): RequestInterceptor = RequestInterceptor {
+        it.query("api_key", apiKey)
     }
 
     @Bean
-    fun logger(): Logger.Level {
-        return Logger.Level.FULL
-    }
+    fun logger(): Logger.Level = Logger.Level.FULL
 }
