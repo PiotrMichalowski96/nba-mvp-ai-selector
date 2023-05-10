@@ -6,4 +6,7 @@ data class Stats(
     val rebounds: Int,
     val steals: Int,
     val blocks: Int,
-)
+) {
+    override fun toString(): String =
+        "$points points, $assists assists, $rebounds rebounds, $steals steals, $blocks blocks"
+}
