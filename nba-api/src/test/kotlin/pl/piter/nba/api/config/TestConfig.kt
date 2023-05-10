@@ -8,7 +8,7 @@ import org.springframework.kafka.config.StreamsBuilderFactoryBean
 import pl.piter.nba.api.producer.NbaGameProducer
 import pl.piter.nba.api.service.NbaGameService
 import pl.piter.nba.api.service.ScoreApiService
-import pl.piter.nba.api.validation.AnnotationValidator
+import pl.piter.commons.validation.AnnotationValidator
 
 @TestConfiguration
 @Import(NbaGameService::class, ScoreApiService::class, AnnotationValidator::class)

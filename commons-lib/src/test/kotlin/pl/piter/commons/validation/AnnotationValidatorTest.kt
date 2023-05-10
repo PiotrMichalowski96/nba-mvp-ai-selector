@@ -1,6 +1,6 @@
-package pl.piter.nba.api.validation
+package pl.piter.commons.validation
 
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.extension.ExtendWith
@@ -17,7 +17,7 @@ import pl.piter.commons.util.JsonConverter
 @ExtendWith(SpringExtension::class)
 @ContextConfiguration(classes = [LocalValidatorFactoryBean::class])
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class AnnotationValidatorTest() {
+class AnnotationValidatorTest {
 
     @Autowired
     private lateinit var validator: Validator
@@ -41,6 +41,6 @@ class AnnotationValidatorTest() {
         val result: Boolean = annotationValidator.validate(mvp)
 
         //then
-        assertThat(result).isEqualTo(expectedResult)
+        Assertions.assertThat(result).isEqualTo(expectedResult)
     }
 }

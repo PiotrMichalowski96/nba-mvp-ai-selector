@@ -1,4 +1,4 @@
-package pl.piter.nba.api.validation
+package pl.piter.commons.validation
 
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
