@@ -23,7 +23,7 @@ class ChatGPTApiClientTest(@Autowired private val apiClient: ChatGPTApiClient) {
     @Test
     fun `given chat request when call chat GPT endpoint then return chat answer`() {
         //given
-        val chatQuestionSample = "src/test/resources/postChatGPT.json"
+        val chatQuestionSample = "src/test/resources/requestChatGPT.json"
         val chatRequest: ChatGPTRequest = JsonConverter.readJsonFile(chatQuestionSample)
 
         //when
