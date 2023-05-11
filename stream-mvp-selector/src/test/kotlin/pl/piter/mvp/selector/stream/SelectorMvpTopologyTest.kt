@@ -32,6 +32,11 @@ import pl.piter.mvp.selector.util.MockedChatGPT
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SelectorMvpTopologyTest {
 
+    companion object {
+        private const val MVP_TOPIC = "mvp"
+        private const val MATCH_TOPIC = "match"
+    }
+
     private lateinit var selectorTopology: SelectorMvpTopology
 
     @Autowired
@@ -57,33 +62,73 @@ class SelectorMvpTopologyTest {
         val expectedMvpSample = "src/test/resources/mvpEvent.json"
         val expectedMvpEvent: MvpEvent = JsonConverter.readJsonFile(expectedMvpSample)
 
-        val key = nbaGameEvent.gameId
+        val responseSample = "src/test/resources/responseChatGPT.json"
+        val response: ChatGPTResponse = JsonConverter.readJsonFile(responseSample)
 
-        mockExternalChatAPI(nbaGameEvent)
+        mockedChatGPT.mockAskChatGPT(nbaGameEvent.toChatGPTRequest(), response)
+
+        val assertMvpEvent: OutputTopicAssertion = {
+            val record: KeyValue<String, MvpEvent> = it.readKeyValue()
+            assertThat(record.key).isEqualTo(nbaGameEvent.gameId)
+            assertThat(record.value).isEqualTo(expectedMvpEvent)
+        }
+
+        //whenThen
+        topologyTestCase(nbaGameEvent, assertMvpEvent)
+    }
+
+    @Test
+    fun `given invalid nba game event when processed then output topic is empty`() {
+        //given
+        val invalidGameSample = "src/test/resources/invalidNbaGameEvent.json"
+        val invalidNbaGameEvent: NbaGameEvent = JsonConverter.readJsonFile(invalidGameSample)
+
+        //whenThen
+        topologyTestCase(invalidNbaGameEvent, assertEmptyTopic)
+    }
+
+    @Test
+    fun `given invalid response from ChatGPT when processed then output topic is empty`() {
+        //given
+        val nbaGameSample = "src/test/resources/nbaGameEvent.json"
+        val nbaGameEvent: NbaGameEvent = JsonConverter.readJsonFile(nbaGameSample)
+
+        val invalidResponseSample = "src/test/resources/validation/invalidAbsentAnswer.json"
+        val invalidResponse: ChatGPTResponse = JsonConverter.readJsonFile(invalidResponseSample)
+
+        mockedChatGPT.mockAskChatGPT(nbaGameEvent.toChatGPTRequest(), invalidResponse)
+
+        //whenThen
+        topologyTestCase(nbaGameEvent, assertEmptyTopic)
+    }
+
+    private fun topologyTestCase(nbaGameEvent: NbaGameEvent, assertion: OutputTopicAssertion) {
+        //given
+        val key = nbaGameEvent.gameId
 
         //when
         val topologyTestDriver: TopologyTestDriver = initializeTestDriver()
 
         topologyTestDriver.use {
             val inputTopic: TestInputTopic<String, NbaGameEvent> =
-                topologyTestDriver.createInputTopic("match", StringSerializer(), JsonSerializer())
+                topologyTestDriver.createInputTopic(MATCH_TOPIC, StringSerializer(), JsonSerializer())
 
             val outputTopic: TestOutputTopic<String, MvpEvent> =
-                topologyTestDriver.createOutputTopic("mvp", StringDeserializer(), JsonDeserializer(MvpEvent::class.java))
+                topologyTestDriver.createOutputTopic(MVP_TOPIC, StringDeserializer(), JsonDeserializer(MvpEvent::class.java))
 
             inputTopic.pipeInput(key, nbaGameEvent)
 
-            val record: KeyValue<String, MvpEvent> = outputTopic.readKeyValue()
-
             //then
-            assertThat(record.key).isEqualTo(key)
-            assertThat(record.value).isEqualTo(expectedMvpEvent)
+            assertion.invoke(outputTopic)
         }
+    }
 
+    private val assertEmptyTopic: OutputTopicAssertion = {
+        assertThat(it.isEmpty).isTrue()
     }
 
     private fun setupTopology() {
-        val topicProperties = TopicProperties("match", "mvp")
+        val topicProperties = TopicProperties(MATCH_TOPIC, MVP_TOPIC)
         val annotationValidator = AnnotationValidator(validator)
         val apiService = ChatGPTApiService(apiClient)
         selectorTopology = SelectorMvpTopology(topicProperties, annotationValidator, apiService)
@@ -95,10 +140,6 @@ class SelectorMvpTopologyTest {
         val topology: Topology =  streamsBuilder.build()
         return TopologyTestDriver(topology)
     }
-
-    private fun mockExternalChatAPI(nbaGameEvent: NbaGameEvent) {
-        val responseSample = "src/test/resources/responseChatGPT.json"
-        val response: ChatGPTResponse = JsonConverter.readJsonFile(responseSample)
-        mockedChatGPT.mockAskChatGPT(nbaGameEvent.toChatGPTRequest(), response)
-    }
 }
+
+typealias OutputTopicAssertion = (TestOutputTopic<String, MvpEvent>) -> Unit
