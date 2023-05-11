@@ -29,6 +29,11 @@ import java.util.*
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class MvpTopologyTest {
 
+    companion object {
+        private const val MVP_TOPIC = "mvp"
+        private const val MATCH_TOPIC = "match"
+    }
+
     @Autowired
     private lateinit var validator: Validator
 
@@ -36,7 +41,7 @@ class MvpTopologyTest {
 
     @BeforeAll
     fun init() {
-        val topicProperties = TopicProperties("match", "mvp")
+        val topicProperties = TopicProperties(MATCH_TOPIC, MVP_TOPIC)
         val annotationValidator = AnnotationValidator(validator)
         mvpTopology = MvpTopology(topicProperties, annotationValidator)
     }
@@ -67,15 +72,15 @@ class MvpTopologyTest {
 
     private fun topologyTestCase(eventSample: String, assertion: MvpAssertion) {
         //given
-        val invalidMvpEvent: MvpEvent = JsonConverter.readJsonFile(eventSample)
-        val id: String = invalidMvpEvent.gameId
+        val mvpEvent: MvpEvent = JsonConverter.readJsonFile(eventSample)
+        val id: String = mvpEvent.gameId
 
         //when
         val topologyTestDriver: TopologyTestDriver = initializeTestDriver()
 
         topologyTestDriver.use {
-            val inputTopic: TestInputTopic<String, MvpEvent> = topologyTestDriver.createInputTopic("mvp", StringSerializer(), JsonSerializer())
-            inputTopic.pipeInput(id, invalidMvpEvent)
+            val inputTopic: TestInputTopic<String, MvpEvent> = topologyTestDriver.createInputTopic(MVP_TOPIC, StringSerializer(), JsonSerializer())
+            inputTopic.pipeInput(id, mvpEvent)
 
             val store: KeyValueStore<String, NbaGameMvp> = topologyTestDriver.getKeyValueStore(MvpTopology.MVP_STORE)
             val nbaGameMvp: NbaGameMvp? = store[id]
