@@ -1,0 +1,21 @@
+{
+  "id": "   ",
+  "object": "chat.completion",
+  "created": 1682442617,
+  "model": "gpt-3.5-turbo-0301",
+  "usage": {
+    "prompt_tokens": 161,
+    "completion_tokens": 19,
+    "total_tokens": 180
+  },
+  "choices": [
+    {
+      "message": {
+        "role": "assistant",
+        "content": "Trae Young; impressive performance with high points, assists, rebounds, steals, and blocks."
+      },
+      "finish_reason": "stop",
+      "index": 0
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Trae Young",
+    "team": "Hawks",
+    "stats": {
+      "points": 32,
+      "assists": 9,
+      "rebounds": 6,
+      "steals": 1,
+      "blocks": 2
+    }
+  },
+  {
+    "name": "Clint Capela",
+    "team": "Hawks",
+    "stats": {
+      "points": 10,
+      "assists": 0,
+      "rebounds": 11,
+      "steals": 1,
+      "blocks": 0
+    }
+  },
+  {
+    "name": "jayson tatum",
+    "team": "Celtics",
+    "stats": {
+      "points": 29,
+      "assists": 5,
+      "rebounds": 10,
+      "steals": 2,
+      "blocks": 0
+    }
+  },
+  {
+    "name": "Marcus Smart",
+    "team": "Celtics",
+    "stats": {
+      "points": 24,
+      "assists": 8,
+      "rebounds": 3,
+      "steals": 3,
+      "blocks": 0
+    }
+  }
+]

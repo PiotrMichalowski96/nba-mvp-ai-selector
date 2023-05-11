@@ -21,7 +21,7 @@ import pl.piter.commons.api.model.nba.NbaGameMvp
 import pl.piter.commons.domain.MvpEvent
 import pl.piter.commons.util.JsonConverter
 import pl.piter.nba.api.config.TopicProperties
-import pl.piter.nba.api.validation.AnnotationValidator
+import pl.piter.commons.validation.AnnotationValidator
 import java.util.*
 
 @ExtendWith(SpringExtension::class)

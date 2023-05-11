@@ -1,4 +1,4 @@
-package pl.piter.nba.api.validation
+package pl.piter.commons.validation
 
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
@@ -7,7 +7,7 @@ import org.springframework.validation.Errors
 import org.springframework.validation.Validator
 
 @Component
-class AnnotationValidator(private val validator: Validator) {
+class AnnotationValidator(private val validator: Validator) : Validatable<Any> {
 
     companion object {
         @JvmStatic
@@ -15,9 +15,9 @@ class AnnotationValidator(private val validator: Validator) {
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
     }
 
-    fun validate(any: Any): Boolean {
-        val errors: Errors = BeanPropertyBindingResult(any, any::class.simpleName ?: "any")
-        validator.validate(any, errors)
+    override fun validate(toValidate: Any): Boolean {
+        val errors: Errors = BeanPropertyBindingResult(toValidate, toValidate::class.simpleName ?: "any")
+        validator.validate(toValidate, errors)
         if (errors.hasErrors()) {
             logger.info("Not valid object: ${errors.allErrors}")
             return false

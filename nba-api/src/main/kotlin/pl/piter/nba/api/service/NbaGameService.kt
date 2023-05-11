@@ -16,7 +16,7 @@ import pl.piter.nba.api.mapper.toNbaGameEvent
 import pl.piter.nba.api.mapper.toNbaGames
 import pl.piter.nba.api.producer.NbaGameProducer
 import pl.piter.nba.api.stream.MvpTopology.Companion.MVP_STORE
-import pl.piter.nba.api.validation.AnnotationValidator
+import pl.piter.commons.validation.AnnotationValidator
 import java.time.LocalDate
 
 @Service

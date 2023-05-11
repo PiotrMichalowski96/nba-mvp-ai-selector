@@ -15,7 +15,7 @@ import pl.piter.commons.api.model.nba.NbaGameMvp
 import pl.piter.commons.domain.MvpEvent
 import pl.piter.nba.api.config.TopicProperties
 import pl.piter.nba.api.mapper.toNbaGameMvp
-import pl.piter.nba.api.validation.AnnotationValidator
+import pl.piter.commons.validation.AnnotationValidator
 
 @Component
 class MvpTopology(
