@@ -12,6 +12,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.validation.Validator
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean
 import pl.piter.commons.api.model.chatgpt.ChatGPTResponse
+import pl.piter.commons.api.model.chatgpt.Choice
+import pl.piter.commons.api.model.chatgpt.Message
+import pl.piter.commons.api.model.chatgpt.Role
 import pl.piter.commons.domain.Player
 import pl.piter.commons.util.JsonConverter
 import pl.piter.commons.validation.AnnotationValidator
@@ -35,9 +38,16 @@ class ResponseValidatorTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = [
-        "invalidAbsentAnswer.json,false"
-    ])
+    @CsvSource(
+        value = [
+            "invalidAbsentAnswer.json, false",
+            "invalidAIComment.json, false",
+            "invalidFormat.json, false",
+            "invalidId.json, false",
+            "invalidPlayerName.json, false",
+            "valid.json, true"
+        ]
+    )
     fun `given ChatGPT response when validate then return validation result`(
         sample: String,
         expectedResult: Boolean
@@ -51,5 +61,44 @@ class ResponseValidatorTest {
 
         //then
         assertThat(result).isEqualTo(expectedResult)
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        delimiter = '#', ignoreLeadingAndTrailingWhitespace = true, value = [
+            "Trae Young; impressive performance with high points, assists and blocks.# true",
+            "Trae Young, basketball# false",
+            " Trae Young ; reason # true",
+            "Trae Young ; comment# true",
+            " Trae Young;opinion# true",
+            "jayson tatum;reason# true",
+            " ;some-words# false",
+            "some-words; # false",
+            " ; # false"
+        ]
+    )
+    fun `given answer format when validate against regex then return validation result`(
+        answer: String,
+        expectedResult: Boolean
+    ) {
+        //given
+        val chatGPTResponse: ChatGPTResponse = createResponse(answer)
+
+        //when
+        val result: Boolean = responseValidator.validate(chatGPTResponse)
+
+        //then
+        assertThat(result).isEqualTo(expectedResult)
+    }
+
+    private fun createResponse(answer: String): ChatGPTResponse {
+        val message = Message(Role.user, answer)
+        val choice = Choice(message, "reason", 123)
+        return ChatGPTResponse(
+            "123",
+            123L,
+            "chat-gpt4",
+            listOf(choice)
+        )
     }
 }

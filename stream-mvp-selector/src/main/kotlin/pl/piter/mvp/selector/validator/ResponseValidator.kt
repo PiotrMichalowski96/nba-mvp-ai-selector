@@ -10,13 +10,14 @@ class ResponseValidator(
 ) : Validatable<ChatGPTResponse> {
 
     companion object {
-        private const val ANSWER_FORMAT_REGEX = "(\\w+);(\\w+)"
+        private const val PLAYER_SEMICOLON_REASON_PATTERN =
+            "^\\s*[a-zA-Z]+(\\s+[a-zA-Z]+)*\\s*;\\s*\\S.*\\S\\s*$"
     }
 
     override fun validate(toValidate: ChatGPTResponse): Boolean =
         validationCriteria.all { it.validate(toValidate) }
 
-    private val validationCriteria: List<Validatable<ChatGPTResponse>> = listOf(
+    private val validationCriteria: Set<Validatable<ChatGPTResponse>> = setOf(
         Validatable { validator.validate(it) },
         Validatable { chatAnswersSize(it) },
         Validatable { answerCorrectFormat(it) },
@@ -28,12 +29,12 @@ class ResponseValidator(
 
     private fun answerCorrectFormat(response: ChatGPTResponse): Boolean {
         val answer: String = fetchAnswerFrom(response)
-        return ANSWER_FORMAT_REGEX.toRegex().matches(answer)
+        return PLAYER_SEMICOLON_REASON_PATTERN.toRegex().matches(answer)
     }
 
     private fun containsMvpPlayer(response: ChatGPTResponse): Boolean {
         val answer: String = fetchAnswerFrom(response)
-        val player: String = answer.split(";")[0]
+        val player: String = answer.split(";")[0].trim()
         return players
             .map { it.name }
             .any { it == player }
@@ -41,7 +42,7 @@ class ResponseValidator(
 
     private fun containsReasonAI(response: ChatGPTResponse): Boolean {
         val answer: String = fetchAnswerFrom(response)
-        val reason: String = answer.split(";")[1]
+        val reason: String = answer.split(";")[1].trim()
         return reason.isNotBlank()
     }
 
