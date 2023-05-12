@@ -1,6 +1,13 @@
 ---
 version: '3'
 services:
+  redis:
+    image: redis/redis-stack
+    container_name: redis-stack
+    ports:
+      - "6379:6379"
+      - "8001:8001"
+
   zookeeper:
     image: confluentinc/cp-zookeeper
     container_name: zookeeper
@@ -12,8 +19,6 @@ services:
     image: confluentinc/cp-kafka
     container_name: broker
     ports:
-      # To learn about configuring Kafka for access across networks see
-      # https://www.confluent.io/blog/kafka-client-cannot-connect-to-broker-on-aws-on-docker-etc/
       - "9092:9092"
     depends_on:
       - zookeeper
