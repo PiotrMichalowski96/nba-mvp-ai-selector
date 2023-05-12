@@ -1,5 +1,7 @@
 spring.application.name: stream-mvp-selector
 
+spring.kafka.bootstrap-servers: localhost:9092
+
 #External ChatGPT API
 chat-gpt.api:
   url: https://api.openai.com/v1

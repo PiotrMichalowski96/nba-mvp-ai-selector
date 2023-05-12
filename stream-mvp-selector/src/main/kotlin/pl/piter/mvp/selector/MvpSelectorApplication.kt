@@ -9,8 +9,8 @@ import pl.piter.commons.config.CommonsConfig
 @EnableFeignClients(basePackages = ["pl.piter.mvp.selector.rest"])
 @Import(CommonsConfig::class)
 @SpringBootApplication
-class NbaApiApplication
+class MvpSelectorApplication
 
 fun main(args: Array<String>) {
-    runApplication<NbaApiApplication>(*args)
+    runApplication<MvpSelectorApplication>(*args)
 }

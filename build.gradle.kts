@@ -73,6 +73,7 @@ sonarqube {
         property("sonar.organization", "piotrmichalowski96")
         property("sonar.host.url", "https://sonarcloud.io")
         property("sonar.coverage.exclusions", "**/config/*, **/exception/*, **/model/**, **/domain/*")
+        property("sonar.cpd.exclusions", "**/config/*")
     }
 }
 
