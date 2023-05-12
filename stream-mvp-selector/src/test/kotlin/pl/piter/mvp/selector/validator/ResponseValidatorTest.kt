@@ -57,7 +57,8 @@ class ResponseValidatorTest {
         val chatGPTResponse: ChatGPTResponse = JsonConverter.readJsonFile(directory + sample)
 
         //when
-        val result: Boolean = responseValidator.validate(chatGPTResponse)
+        val result: Boolean = responseValidator.logAndValidate("Chat response is not valid",
+            chatGPTResponse)
 
         //then
         assertThat(result).isEqualTo(expectedResult)
