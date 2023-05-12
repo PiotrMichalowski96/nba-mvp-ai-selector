@@ -18,10 +18,10 @@ class AnnotationValidator(private val validator: Validator) : Validatable<Any> {
     override fun validate(toValidate: Any): Boolean {
         val errors: Errors = BeanPropertyBindingResult(toValidate, toValidate::class.simpleName ?: "any")
         validator.validate(toValidate, errors)
-        if (errors.hasErrors()) {
-            logger.info("Not valid object: ${errors.allErrors}")
-            return false
+        val invalid: Boolean = errors.hasErrors()
+        if (invalid) {
+            logger.warn("Not valid object: ${errors.allErrors}")
         }
-        return true
+        return !invalid
     }
 }

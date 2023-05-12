@@ -41,7 +41,7 @@ class SelectorMvpTopology(
 
         nbaGameEvents(streamsBuilder)
             .peek { gameId, _ -> logger.info("Start processing event [key=$gameId]")}
-            .filter { _, gameEvent -> validator.validate(gameEvent) }
+            .filter { _, gameEvent -> validator.logAndValidate("Game event is not valid!", gameEvent) }
             .mapValues { gameEvent -> callChatGPT(gameEvent) }
             .filter { _, eventContainer -> validateChatResponse(eventContainer) }
             .mapValues { eventContainer -> eventContainer.nbaGameEvent.toMvpEvent(eventContainer.chatGPTResponse) }
@@ -64,10 +64,6 @@ class SelectorMvpTopology(
     private fun validateChatResponse(eventContainer: EventContainer): Boolean {
         val players: Set<Player> = eventContainer.nbaGameEvent.bestPlayers
         val responseValidator = ResponseValidator(validator, players)
-        val validationResult: Boolean = responseValidator.validate(eventContainer.chatGPTResponse)
-        if (!validationResult) {
-            logger.error("Chat response is not valid!")
-        }
-        return validationResult
+        return responseValidator.logAndValidate("Chat response is not valid!", eventContainer.chatGPTResponse)
     }
 }
