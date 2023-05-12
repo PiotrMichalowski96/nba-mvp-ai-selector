@@ -66,4 +66,18 @@ class NbaGameControllerTest(@Autowired private val mockMvc: MockMvc) {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.length()").value(3))
     }
+
+    @Test
+    fun `given error during external API call when handle exception then return error message`() {
+        //given
+        val id = generateId(30)
+        mockedExternalAPI.mockErrorGetGameEndpoint(id)
+
+        val expectedMessage = "Cannot get response from NBA games scores provider"
+
+        //whenThen
+        mockMvc.perform(get("/nba-game/$id"))
+            .andExpect(status().isBadRequest)
+            .andExpect(content().string(expectedMessage))
+    }
 }
