@@ -16,6 +16,7 @@ Technology stack:
 - Spring Boot
 - Apache Kafka
 - Redis
+- REST API (with HATEOAS support)
 
 Testing:
 - Embedded Kafka Tests (integration tests)
