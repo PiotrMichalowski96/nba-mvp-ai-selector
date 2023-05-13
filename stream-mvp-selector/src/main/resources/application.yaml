@@ -1,4 +1,5 @@
 spring.application.name: stream-mvp-selector
+server.port: 8081
 
 spring.kafka.bootstrap-servers: localhost:9092
 
