@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.context.annotation.Import
-import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
@@ -46,8 +45,10 @@ class NbaGameControllerTest(@Autowired private val mockMvc: MockMvc) {
         //whenThen
         mockMvc.perform(get("/nba-game/$id"))
             .andExpect(status().isOk)
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(content().contentType("application/hal+json"))
             .andExpect(jsonPath("$.homeTeam").value("Atlanta Hawks"))
+            .andExpect(jsonPath("$._links.self.href").value("http://localhost/nba-game/${gameResponse.id}"))
+            .andExpect(jsonPath("$._links.mvp.href").value("http://localhost/nba-game/${gameResponse.id}/mvp"))
     }
 
     @Test
@@ -56,6 +57,8 @@ class NbaGameControllerTest(@Autowired private val mockMvc: MockMvc) {
         val gameListResponseSample = "src/test/resources/gamesListByDate.json"
         val gameListResponse: GameListResponse = JsonConverter.readJsonFile(gameListResponseSample)
 
+        val firstGameId: String = gameListResponse.games[0].id
+
         val gameTime: LocalDate = LocalDate.of(2023, 5, 4)
         mockedExternalAPI.mockGetGameListEndpoint(gameTime, gameListResponse)
 
@@ -63,8 +66,11 @@ class NbaGameControllerTest(@Autowired private val mockMvc: MockMvc) {
         mockMvc.perform(get("/nba-game")
             .param("game-time", gameTime.format(DateTimeFormatter.ISO_DATE)))
             .andExpect(status().isOk)
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.length()").value(3))
+            .andExpect(content().contentType("application/hal+json"))
+            .andExpect(jsonPath("$._embedded.nbaGameList.length()").value(3))
+            .andExpect(jsonPath("$._links.self.href").value("http://localhost/nba-game?game-time=5%2F4%2F23"))
+            .andExpect(jsonPath("$._embedded.nbaGameList[0]._links.self.href").value("http://localhost/nba-game/${firstGameId}"))
+            .andExpect(jsonPath("$._embedded.nbaGameList[0]._links.mvp.href").value("http://localhost/nba-game/${firstGameId}/mvp"))
     }
 
     @Test
