@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration
 import org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+import org.springframework.boot.test.context.ConfigDataApplicationContextInitializer
 import org.springframework.cache.CacheManager
 import org.springframework.context.annotation.Import
+import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import pl.piter.commons.api.model.scores.GameListResponse
 import pl.piter.commons.api.model.scores.GameResponse
@@ -29,6 +31,7 @@ import java.time.LocalDate
 @ExtendWith(SpringExtension::class, RedisExtension::class)
 @Import(ScoreApiService::class, CacheConfig::class)
 @ImportAutoConfiguration(CacheAutoConfiguration::class, RedisAutoConfiguration::class)
+@ContextConfiguration(initializers = [ConfigDataApplicationContextInitializer::class])
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ScoreApiServiceTest {
 
@@ -103,19 +106,48 @@ class ScoreApiServiceTest {
         mockedExternalAPI.mockGetGameEndpoint(id, response)
 
         //when
-        val responseCacheMiss: GameResponse = scoreApiService.callGame(id)
-        val responseCacheHit: GameResponse = scoreApiService.callGame(id)
+        val gameResponseCacheMiss: GameResponse = scoreApiService.callGame(id)
+        val gameResponseCacheHit: GameResponse = scoreApiService.callGame(id)
 
 
         //then
-        assertThat(responseCacheMiss).isEqualTo(response)
-        assertThat(responseCacheHit).isEqualTo(response)
+        assertThat(gameResponseCacheMiss).isEqualTo(response)
+        assertThat(gameResponseCacheHit).isEqualTo(response)
 
         verify(exactly = 1) { apiClient.findGame(id) }
-        assertThat(responseFromCache(id)).isEqualTo(response)
+        assertThat(gameResponseFromCache(id)).isEqualTo(response)
     }
 
-    private fun responseFromCache(id: String): Any? {
-        return cacheManager.getCache("game")?.get(id)?.get()
+    @Test
+    fun `given Redis caching when call get games list endpoint then return games list from cache`() {
+        //given
+        val gameSchedule: LocalDate = LocalDate.of(2023, 5, 12)
+        val gamesResponseSamplePath = "src/test/resources/gamesListByDate.json"
+        val response: GameListResponse = JsonConverter.readJsonFile(gamesResponseSamplePath)
+
+        mockedExternalAPI.mockGetGameListEndpoint(gameSchedule, response)
+
+        //when
+        val gameListCacheMiss: GameListResponse = scoreApiService.callGameList(gameSchedule)
+        val gameListCacheHit: GameListResponse = scoreApiService.callGameList(gameSchedule)
+
+        //then
+        assertThat(gameListCacheMiss).isEqualTo(response)
+        assertThat(gameListCacheHit).isEqualTo(response)
+
+        verify(exactly = 1) {
+            apiClient.findGameList(
+                gameSchedule.year,
+                gameSchedule.monthValue,
+                gameSchedule.dayOfMonth
+            )
+        }
+        assertThat(gameListFromCache(gameSchedule)).isEqualTo(response)
     }
+
+    private fun gameResponseFromCache(id: String): Any? =
+        cacheManager.getCache("game")?.get(id)?.get()
+
+    private fun gameListFromCache(gameSchedule: LocalDate): Any? =
+        cacheManager.getCache("gameList")?.get(gameSchedule)?.get()
 }

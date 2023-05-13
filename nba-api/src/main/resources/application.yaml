@@ -4,9 +4,12 @@ spring.data.redis:
   host: localhost
   port: 6379
 
-spring.kafka.bootstrap-servers: localhost:9092
+cache:
+  gameName: game
+  gameListName: gameList
+  timeoutInMinutes: 60
 
-cache.timeoutInMinutes: 60
+spring.kafka.bootstrap-servers: localhost:9092
 
 #External NBA scores provider API - SportRadar
 nba-scores-provider.api:
