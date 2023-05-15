@@ -6,19 +6,152 @@
 	},
 	"item": [
 		{
+			"name": "metrics",
+			"item": [
+				{
+					"name": "nba-api",
+					"item": [
+						{
+							"name": "Metrics: health",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/actuator/health",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"actuator",
+										"health"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Metrics: consumer lag",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/actuator/metrics/kafka.consumer.fetch.manager.records.lag",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"actuator",
+										"metrics",
+										"kafka.consumer.fetch.manager.records.lag"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Metrics: latency",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/actuator/metrics/kafka.stream.thread.process.latency.avg",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"actuator",
+										"metrics",
+										"kafka.stream.thread.process.latency.avg"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Metrics: process total",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/actuator/metrics/kafka.stream.thread.process.total",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"actuator",
+										"metrics",
+										"kafka.stream.thread.process.total"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "mvp-stream",
+					"item": [
+						{
+							"name": "Metrics: health",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8081/actuator/health",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"actuator",
+										"health"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Metrics: process total",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8081/actuator/metrics/kafka.stream.thread.process.total",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"actuator",
+										"metrics",
+										"kafka.stream.thread.process.total"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "Get NBA game by ID",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/nba-game/08566915-257a-4109-b1df-96757a0b9434",
+					"raw": "localhost:8080/nba-game/ab138a63-2b02-48cc-bd2a-73a7c9782f5f",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"nba-game",
-						"08566915-257a-4109-b1df-96757a0b9434"
+						"ab138a63-2b02-48cc-bd2a-73a7c9782f5f"
 					]
 				}
 			},
@@ -30,14 +163,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/nba-game/2b07dbd1-ee88-411e-95f2-533755d65263/mvp",
+					"raw": "localhost:8080/nba-game/ab138a63-2b02-48cc-bd2a-73a7c9782f5f/mvp",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"nba-game",
-						"2b07dbd1-ee88-411e-95f2-533755d65263",
+						"ab138a63-2b02-48cc-bd2a-73a7c9782f5f",
 						"mvp"
 					]
 				}
@@ -50,14 +183,14 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/nba-game/77592882-dc20-4ec9-862b-5f8d9d0a586d/mvp",
+					"raw": "localhost:8080/nba-game/ab138a63-2b02-48cc-bd2a-73a7c9782f5f/mvp",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"nba-game",
-						"77592882-dc20-4ec9-862b-5f8d9d0a586d",
+						"ab138a63-2b02-48cc-bd2a-73a7c9782f5f",
 						"mvp"
 					]
 				}
@@ -70,7 +203,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/nba-game?game-time=2023-05-02",
+					"raw": "localhost:8080/nba-game?game-time=2023-05-10",
 					"host": [
 						"localhost"
 					],
@@ -81,7 +214,7 @@
 					"query": [
 						{
 							"key": "game-time",
-							"value": "2023-05-02"
+							"value": "2023-05-10"
 						}
 					]
 				}
