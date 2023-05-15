@@ -1,9 +1,0 @@
-{
-  "model": "gpt-3.5-turbo",
-  "messages": [
-    {
-      "role": "user",
-      "content": "Please select mvp of NBA game: Hawks - Celtics, result 130 - 122. Players statistics: 1) Trae Young, Hawks team, 32 points, 9 assists, 6 rebounds, 1 steals, 2 blocks \n 2) Clint Capela, Hawks team, 10 points, 0 assists, 11 rebounds, 1 steals, 0 blocks \n 3) Jayson Tatum , Celtics team, 29 points, 5 assists, 10 rebounds, 2 steals, 0 blocks \n 4) Marcus Smart, Celtics team, 24 points, 8 assists, 3 rebounds, 3 steals, 0 blocks. \n Please respond in format only: playername;reason"
-    }
-  ]
-}

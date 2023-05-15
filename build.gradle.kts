@@ -38,6 +38,8 @@ subprojects {
         implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
         implementation("org.springframework.boot:spring-boot-starter-validation")
         implementation("org.springframework.boot:spring-boot-starter-hateoas")
+        implementation("org.springframework.boot:spring-boot-starter-actuator")
+        implementation("io.micrometer:micrometer-registry-prometheus:1.11.0")
         testImplementation("org.springframework.boot:spring-boot-starter-test") {
             exclude("org.mockito:mockito-core")
         }

@@ -1,5 +1,6 @@
 package pl.piter.mvp.selector.config
 
+import io.micrometer.core.instrument.MeterRegistry
 import org.apache.kafka.common.serialization.Serdes
 import org.apache.kafka.streams.StreamsConfig.*
 import org.springframework.beans.factory.annotation.Value
@@ -10,6 +11,7 @@ import org.springframework.kafka.annotation.EnableKafka
 import org.springframework.kafka.annotation.EnableKafkaStreams
 import org.springframework.kafka.annotation.KafkaStreamsDefaultConfiguration
 import org.springframework.kafka.config.KafkaStreamsConfiguration
+import org.springframework.kafka.streams.KafkaStreamsMicrometerListener
 import org.springframework.kafka.support.serializer.JsonSerde
 
 @Configuration
@@ -31,4 +33,8 @@ class KafkaConfig(
         )
         return KafkaStreamsConfiguration(properties)
     }
+
+    @Bean
+    fun kafkaStreamsMicrometerListener(meterRegistry: MeterRegistry) =
+        KafkaStreamsMicrometerListener(meterRegistry)
 }
