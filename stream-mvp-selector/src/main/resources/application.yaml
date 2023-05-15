@@ -12,5 +12,14 @@ topic:
   match: match-test-v1
   mvp: mvp-test-v1
 
+management:
+  endpoints.web:
+    base-path: /actuator
+    exposure.include: "*"
+  endpoint:
+    health.show-details: always
+    metrics.enabled: true
+    prometheus.enabled: true
+
 logging.level:
   pl.piter.mvp.selector.rest: DEBUG
